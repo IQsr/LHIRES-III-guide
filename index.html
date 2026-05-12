@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical Guide to LHIRES III Spectroscopy at NTU Observatory</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<button id="navToggle" aria-label="Toggle navigation">&#9776;</button>
+
+<aside id="sidebar">
+  <div class="brand">
+    <div class="brand-title">LHIRES III</div>
+    <div class="brand-sub">NTU Observatory · Practical Guide</div>
+  </div>
+  <nav>
+    <ol>
+      <li><a href="#overview">1. Setup Overview</a></li>
+      <li><a href="#simulator">2. Interactive Simulator</a></li>
+      <li><a href="#checklist">3. Before Observing Checklist</a></li>
+      <li><a href="#tuning">4. Tuning the Spectrograph</a></li>
+      <li><a href="#wavelength">5. Wavelength Calibration</a></li>
+      <li><a href="#reduction">6. Data Reduction Workflow</a></li>
+      <li><a href="#case-study">7. Case Study: What Went Wrong</a></li>
+      <li><a href="#quickstart">8. Student Quick-Start</a></li>
+      <li><a href="#troubleshooting">9. Troubleshooting</a></li>
+    </ol>
+    <div class="nav-footer">
+      Maintained by NTU Observatory students.<br>
+      Read this <em>before</em> your first night.
+    </div>
+  </nav>
+</aside>
+
+<main>
+
+<header class="hero">
+  <div class="eyebrow">NTU Observatory</div>
+  <h1>Practical Guide to LHIRES III Spectroscopy</h1>
+  <p class="lede">
+    A field manual written by students, for students. The goal is simple: the next person
+    who uses this setup should not repeat the same wavelength-range, lamp-identification,
+    and raw-frame-inspection mistakes that earlier projects ran into.
+  </p>
+  <div class="hero-cards">
+    <a class="hero-card" href="#simulator">
+      <div class="hc-num">2</div>
+      <div class="hc-text"><strong>See it in 3D</strong><br>Play with the interactive simulator before touching the real instrument.</div>
+    </a>
+    <a class="hero-card" href="#tuning">
+      <div class="hc-num">4</div>
+      <div class="hc-text"><strong>Tuning matters</strong><br>The grating angle does <em>not</em> tell you the wavelength.</div>
+    </a>
+    <a class="hero-card" href="#case-study">
+      <div class="hc-num">7</div>
+      <div class="hc-text"><strong>Read the case study</strong><br>One project lost a season of data to an unverified spectral window.</div>
+    </a>
+    <a class="hero-card" href="#quickstart">
+      <div class="hc-num">8</div>
+      <div class="hc-text"><strong>First night?</strong><br>Jump to the quick-start ordered checklist.</div>
+    </a>
+  </div>
+</header>
+
+<!-- ============ 1. SETUP OVERVIEW ============ -->
+<section id="overview">
+  <h2>1. Setup Overview</h2>
+  <p>
+    The instrument chain at NTU Observatory consists of the following components, in the
+    order light travels:
+  </p>
+
+  <div class="chain">
+    <div class="chain-node">
+      <div class="chain-label">Telescope</div>
+      <div class="chain-name">14&Prime; Meade LX200</div>
+    </div>
+    <div class="chain-arrow">&rarr;</div>
+    <div class="chain-node">
+      <div class="chain-label">Spectrograph</div>
+      <div class="chain-name">LHIRES III</div>
+    </div>
+    <div class="chain-arrow">&rarr;</div>
+    <div class="chain-node">
+      <div class="chain-label">Slit imager</div>
+      <div class="chain-name">Slit / Guiding camera</div>
+    </div>
+    <div class="chain-arrow">&rarr;</div>
+    <div class="chain-node">
+      <div class="chain-label">Detector</div>
+      <div class="chain-name">SBIG STF-8300 CCD</div>
+    </div>
+  </div>
+
+  <div class="chain side">
+    <div class="chain-node alt">
+      <div class="chain-label">Calibration</div>
+      <div class="chain-name">Ar&ndash;Ne lamp</div>
+    </div>
+    <div class="chain-arrow">&rarr;</div>
+    <div class="chain-node alt">
+      <div class="chain-label">Acquisition</div>
+      <div class="chain-name">MaxIm DL</div>
+    </div>
+    <div class="chain-arrow">&rarr;</div>
+    <div class="chain-node alt">
+      <div class="chain-label">Mount control</div>
+      <div class="chain-name">TheSkyX</div>
+    </div>
+    <div class="chain-arrow">&rarr;</div>
+    <div class="chain-node alt">
+      <div class="chain-label">Autoguiding</div>
+      <div class="chain-name">PHD2</div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Why this matters</div>
+    Every link in this chain can introduce error: pointing offsets at the telescope,
+    slit misalignment at the spectrograph, focus drift at the CCD, or flexure between
+    science and lamp exposures. The rest of this guide is structured around catching
+    those errors <em>before</em> they ruin a night of data. The next section
+    (<a href="#simulator">&sect;2</a>) lets you see the optical path in 3D before
+    you touch the real instrument.
+  </div>
+</section>
+
+<!-- ============ 2. INTERACTIVE SIMULATOR ============ -->
+<section id="simulator">
+  <h2>2. Interactive Simulator</h2>
+  <p>
+    Before touching the real instrument, get a feel for how light moves through it.
+    The 3D model below mirrors the LHIRES III optical path &mdash; slit, collimator,
+    rotating grating, camera lens, CCD plane. Change the grating density or the
+    micrometer angle and watch where the dispersed spectrum lands on the detector.
+    Two readouts on the simulator make the geometry explicit: the
+    <strong>CCD Wavelength Window</strong> panel (bottom-left) shows the live
+    &lambda; range falling on the detector, and the <strong>What the CCD sees</strong>
+    strip (bottom-right) renders the same spectrum the way a real frame would
+    capture it, with H&alpha;, H&beta;, Na-D and lamp lines marked when they
+    fall inside the window.
+  </p>
+
+  <div class="sim-frame" data-loading="true">
+    <div class="sim-skeleton" aria-hidden="true">
+      <div class="sim-skeleton-spinner"></div>
+      <div class="sim-skeleton-label">Loading 3D simulator&hellip;</div>
+      <div class="sim-skeleton-sub">three.js scene &middot; first load may take a few seconds</div>
+    </div>
+    <iframe
+      src="https://iqsr.github.io/LHIRES-III-simulator/?v=2"
+      title="LHIRES III interactive 3D simulator"
+      loading="lazy"
+      allow="fullscreen"
+      referrerpolicy="no-referrer-when-downgrade"
+      onload="this.parentNode.removeAttribute('data-loading')"
+    ></iframe>
+  </div>
+  <div class="sim-meta">
+    <span class="sim-controls">Left click: rotate &middot; Right click: pan &middot; Scroll: zoom</span>
+    <a href="https://iqsr.github.io/LHIRES-III-simulator/" target="_blank" rel="noopener">Open in a new tab &nearr;</a>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-title">What to try in here</div>
+    <ul class="bullet tight">
+      <li>Click the <strong>H&alpha;</strong> preset, then drag the micrometer a few degrees. Watch H&alpha; walk across the &ldquo;What the CCD sees&rdquo; strip &mdash; and when it falls off the edge, watch the red <em>off-detector</em> warning appear. This is exactly the failure mode behind the case study in &sect;7.</li>
+      <li>With H&alpha; selected, switch between <strong>150&nbsp;l/mm</strong> and <strong>2400&nbsp;l/mm</strong>. The CCD Wavelength Window panel will show how the &lambda; span collapses from thousands of &Aring;ngstr&ouml;ms to a few hundred &mdash; that is the resolution/coverage tradeoff in one screen.</li>
+      <li>Try the <strong>Ar 7635</strong> preset at 2400&nbsp;l/mm: a small micrometer change is enough to push the lamp line off the strip even though the 3D rays still look fine. The grating angle alone does not tell you the wavelength (see &sect;4 and &sect;5).</li>
+      <li>Compare the spectral strip against the lamp-line markers (H&alpha;, H&beta;, Na-D, Hg, He&nbsp;I, Ar&nbsp;I). On a real frame these are the patterns you use to verify the wavelength solution &mdash; the simulator gives you the &ldquo;answer key&rdquo; to build that pattern recognition before the telescope.</li>
+    </ul>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">A model, not the instrument</div>
+    The simulator is a geometric teaching aid and the wavelength readout is a
+    <em>teaching approximation</em>, not a physical calibration of any specific
+    LHIRES III unit. It will not reproduce backlash, flexure, focus drift, or the
+    centring offsets that bite real observations. Use it to build intuition, then
+    trust the lamp frame &mdash; not the simulator, and not the micrometer &mdash;
+    for wavelength.
+  </div>
+</section>
+
+<!-- ============ 3. CHECKLIST ============ -->
+<section id="checklist">
+  <h2>3. Before Observing Checklist</h2>
+  <p>
+    Run through this every night, in order. Print it out if needed. Skipping items is
+    the single biggest cause of unusable data.
+  </p>
+
+  <ul class="check-list">
+    <li><label><input type="checkbox"> Target coordinates checked (RA/Dec, epoch, proper motion if relevant)</label></li>
+    <li><label><input type="checkbox"> Slit orientation checked and recorded</label></li>
+    <li><label><input type="checkbox"> Guide camera connected and producing images</label></li>
+    <li><label><input type="checkbox"> PHD2 calibration done; tracking stable for &gt; 2 min</label></li>
+    <li><label><input type="checkbox"> CCD cooling stable at the target temperature</label></li>
+    <li><label><input type="checkbox"> Exposure time chosen and justified (not just &ldquo;same as last time&rdquo;)</label></li>
+    <li><label><input type="checkbox"> Ar&ndash;Ne lamp frames taken <em>at the same grating position</em> as the science frames</label></li>
+    <li><label><input type="checkbox"> Dark frames matched to science exposure time and temperature</label></li>
+    <li><label><input type="checkbox"> Flat field frames taken (flat-field unit from the upgrade kit)</label></li>
+    <li><label><input type="checkbox"> <strong>Wavelength region confirmed</strong> against an identified lamp line before any science exposure</label></li>
+  </ul>
+
+  <div class="callout warn">
+    <div class="callout-title">The non-negotiable item</div>
+    The last item — <strong>confirming the wavelength region from an identified lamp line</strong>
+    — is the one that has cost the most data in past projects. Do not skip it because
+    &ldquo;the angle looks right.&rdquo;
+  </div>
+</section>
+
+<!-- ============ 4. TUNING ============ -->
+<section id="tuning">
+  <h2>4. How to Tune the Spectrograph</h2>
+
+  <div class="callout danger pull-quote">
+    <div class="callout-title">Read this before touching the grating knob</div>
+    <p>
+      &ldquo;Do not assume the grating angle corresponds to the intended wavelength region.
+      Always verify the spectral window using an Ar&ndash;Ne calibration frame before
+      interpreting science data.&rdquo;
+    </p>
+  </div>
+
+  <p>
+    The LHIRES III uses a rotating grating to select which wavelength range falls on
+    the CCD. The micrometer reading is a <em>guide</em>, not a measurement. Mechanical
+    backlash, hysteresis, the choice of grating (e.g. 600 vs 2400 l/mm), and detector
+    centering all shift the actual window relative to the nominal one.
+  </p>
+
+  <div class="callout tip">
+    <div class="callout-title">Build the intuition first</div>
+    Open the <a href="#simulator">3D simulator in &sect;2</a> and sweep the micrometer
+    at <strong>600&nbsp;l/mm</strong>, then again at <strong>2400&nbsp;l/mm</strong>.
+    The same angle change moves the spectrum by very different amounts &mdash; that is
+    the geometric reason the procedure below exists.
+  </div>
+
+  <h3>Procedure</h3>
+  <ol class="ordered">
+    <li>
+      <strong>Set the grating angle</strong> to the nominal value for your target line
+      (e.g. H&alpha; 6563 &Aring;). Approach the angle from the same direction every
+      time to reduce backlash.
+    </li>
+    <li>
+      <strong>Take an Ar&ndash;Ne lamp frame</strong> immediately, without moving the
+      grating.
+    </li>
+    <li>
+      <strong>Identify at least two lamp lines</strong> on the frame using a reference
+      atlas. Two lines anchor a rough dispersion solution.
+    </li>
+    <li>
+      <strong>Compute the wavelength range</strong> covered by the CCD from those two
+      lines. Compare to what you expected.
+    </li>
+    <li>
+      <strong>If the range is wrong</strong>, adjust the grating in small steps and
+      repeat. Do not skip ahead to science exposures until the window is confirmed.
+    </li>
+    <li>
+      <strong>Record</strong> the final micrometer reading, the lamp frame filename, and
+      the identified lines. This becomes the wavelength reference for the night.
+    </li>
+  </ol>
+
+  <div class="callout tip">
+    <div class="callout-title">Tip</div>
+    Take a fresh lamp frame after every meridian flip, after any focus change, and at
+    the end of the night. Flexure is real.
+  </div>
+
+  <h3>What good and bad focus look like</h3>
+  <p>
+    Focus the spectrograph slit camera on a bright reference star next to the target
+    (Dubhe, magnitude 1.95, was used here). Iterate primary-mirror screw, then the remote
+    fine-focus, until the FWHM is as small as you can make it.
+  </p>
+  <div class="compare-pair">
+    <div class="compare-cell bad">
+      <div class="compare-label">Out of focus</div>
+      <div class="compare-img"><img src="figs/focus_bad.png" alt="Dubhe out of focus, showing the doughnut / annulus pattern of a defocused star"></div>
+      <div class="compare-cap">
+        <strong>Doughnut.</strong> The annulus is the central obstruction of the
+        Schmidt-Cassegrain projected back through the optics. If you see this on a
+        bright star, you are far from focus &mdash; coarse-adjust the primary first.
+        <span class="compare-source">Report 6, Fig 26a (Dubhe)</span>
+      </div>
+    </div>
+    <div class="compare-cell good">
+      <div class="compare-label">In focus</div>
+      <div class="compare-img"><img src="figs/focus_good.png" alt="Dubhe in focus, a tight point source"></div>
+      <div class="compare-cap">
+        <strong>Tight point.</strong> Final focus is reached when the FWHM stops
+        decreasing on the remote control. Use the aperture tool in MaxIm DL to read
+        the FWHM rather than eyeballing it.
+        <span class="compare-source">Report 6, Fig 26b (Dubhe)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. WAVELENGTH CALIBRATION ============ -->
+<section id="wavelength">
+  <h2>5. Wavelength Calibration Guide</h2>
+
+  <ol class="ordered">
+    <li>Take an Ar&ndash;Ne lamp frame at the same grating position as the science frames.</li>
+    <li>Extract a 1D lamp spectrum along the dispersion axis.</li>
+    <li>Identify known lamp lines using a reference atlas (start with the brightest, most isolated lines).</li>
+    <li>Fit pixel position vs. wavelength &mdash; usually a low-order polynomial (2nd or 3rd) is enough.</li>
+    <li>Check the residuals: they should be sub-Angstrom and structureless. Systematic curvature means the order is wrong or you have misidentified a line.</li>
+    <li>Confirm that your expected science line (H&alpha;, H&beta;, etc.) <em>falls inside</em> the calibrated range.</li>
+    <li>If observing a galaxy or other Doppler-shifted source, apply the known redshift/blueshift and confirm the line still falls inside the frame.</li>
+  </ol>
+
+  <div class="callout danger">
+    <div class="callout-title">Common mistake</div>
+    Mistaking the lamp pattern can shift the interpreted wavelength range by
+    <strong>hundreds or thousands of &Aring;ngstr&ouml;ms</strong>. This can lead to
+    searching for H&alpha; in a frame that is actually covering another region entirely
+    &mdash; and finding nothing, with no obvious indication that anything is wrong.
+  </div>
+
+  <h3>How to identify lamp lines without fooling yourself</h3>
+  <ul class="bullet">
+    <li>Match the <em>pattern</em> of strong and weak lines, not just one bright line.</li>
+    <li>Cross-check with a published Ar&ndash;Ne atlas at your spectrograph's resolution.</li>
+    <li>If two solutions seem plausible, take a second lamp frame at a slightly different grating angle and confirm the lines shift in the predicted direction.</li>
+    <li>Have a second person independently identify the lines and compare results.</li>
+  </ul>
+
+  <h3>What a correctly identified Ar&ndash;Ne calibration looks like &mdash; vs. one that isn't</h3>
+  <div class="compare-pair">
+    <div class="compare-cell good">
+      <div class="compare-label">Identified &middot; H&alpha; region</div>
+      <div class="compare-img"><img src="figs/lamp_arc_id.png" alt="Extracted 1D Ar-Ne arc spectrum with eight peaks marked, and the polynomial wavelength solution beneath"></div>
+      <div class="compare-cap">
+        <strong>Eight Ar&ndash;Ne lines matched to NIST.</strong> The residuals are
+        sub-Angstrom (RMS 11.32&nbsp;m&Aring;) and structureless, so the wavelength
+        solution &lambda;(x)=a&#8320;+a&#8321;x+a&#8322;x&sup2; can be trusted across
+        the whole frame. H&alpha; sits comfortably inside the calibrated range.
+        <span class="compare-source">FYP report, Figs 19 &amp; 20 (Phase 1, M81)</span>
+      </div>
+    </div>
+    <div class="compare-cell bad">
+      <div class="compare-label">Wrong window &middot; ~5100&ndash;5400 &Aring;</div>
+      <div class="compare-img"><img src="figs/lamp_bad_window.png" alt="Five Phase-2 M81 science frames where the grating was mis-tuned, sampling 5100-5400 angstrom instead of H-alpha"></div>
+      <div class="compare-cap">
+        <strong>Frames look fine. Window is wrong.</strong> Phase&nbsp;2 of the M81
+        campaign sampled ~5100&ndash;5400&nbsp;&Aring; instead of the intended H&alpha;
+        region &mdash; redward of H&beta;, blueward of H&alpha;, with neither line
+        present. The grating angle was trusted after the Ar&ndash;Ne lamp upgrade
+        without re-identifying the line pattern. Lesson: a clean-looking science
+        frame is not evidence that the wavelength axis is right.
+        <span class="compare-source">FYP report, Fig 24 (Phase 2, 2026-03-17)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. DATA REDUCTION ============ -->
+<section id="reduction">
+  <h2>6. Data Reduction Workflow</h2>
+
+  <p>The standard reduction path for LHIRES III science data:</p>
+
+  <div class="flow">
+    <div class="flow-step">Dark subtraction</div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step">Flat fielding</div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step">Cosmic ray rejection</div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step accent">Wavelength calibration <span class="flow-note">(see &sect;5)</span></div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step accent">2D inspection of the frame <span class="flow-note">(do not skip)</span></div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step">1D extraction along the trace</div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step">Continuum subtraction</div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step">Line fitting</div>
+    <div class="flow-arrow">&darr;</div>
+    <div class="flow-step">Velocity / redshift conversion</div>
+  </div>
+
+  <div class="callout warn">
+    <div class="callout-title">Always inspect 2D frames before extracting 1D</div>
+    A 1D plot can hide cosmic rays, sky lines, double traces, saturation, and
+    misidentified targets. Always look at the raw 2D image first. If something looks
+    weird, it is weird.
+  </div>
+
+  <h3>What a stable spectral trace looks like &mdash; vs. a drifted one</h3>
+  <div class="compare-pair">
+    <div class="compare-cell good">
+      <div class="compare-label">Stable trace</div>
+      <div class="compare-img"><img src="figs/trace_clean.png" alt="Reduced M82 spectrum, exposure 30 minutes, with the H-alpha line marked"></div>
+      <div class="compare-cap">
+        <strong>Single horizontal trace, H&alpha; in a fixed row.</strong> M82 stacked
+        spectrum, 30&nbsp;min exposure. The red box marks the H&alpha; position the
+        analysis pipeline expects. Guiding was locked on the bright comparison star,
+        so the trace did not walk across the CCD.
+        <span class="compare-source">Report 6, Fig 32a (M82, 04/06/2024)</span>
+      </div>
+    </div>
+    <div class="compare-cell bad">
+      <div class="compare-label">Guiding drift</div>
+      <div class="compare-img"><img src="figs/trace_drift_strip.png" alt="Five consecutive Dubhe spectra showing vertical drift on the CCD across 255 seconds, plus a plot quantifying the 24.84 pixel peak-to-peak shift"></div>
+      <div class="compare-cap">
+        <strong>Vertical walk across successive frames.</strong> Five exposures of
+        Dubhe taken back-to-back during a guiding-stability test; the trace shifts
+        24.84&nbsp;pix peak-to-peak over 255&nbsp;s. Stacking these directly will
+        smear H&alpha; and any narrow features. Re-calibrate PHD2 for the current
+        pier side before resuming.
+        <span class="compare-source">FYP report, Fig 31 (guiding drift test)</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>Slit camera and 2D spectrum &mdash; what they look like together</h3>
+  <div class="fig-single">
+    <div class="compare-img"><img src="figs/slit_spectrum.png" alt="Spatial correspondence between the M81 slit camera image (right) and the extracted 2D long-slit spectrum (left), with annotated nuclear background continuum and dark arm of the galaxy"></div>
+    <div class="compare-cap">
+      <strong>The slit image and the 2D spectrum share one axis: spatial position
+      along the slit.</strong> The right-hand panel is the M81 nuclear region as
+      seen on the slit camera, with the red guide-camera crop marking what the
+      science detector sees. The left-hand panel is the corresponding wavelength
+      vs. spatial-position frame &mdash; the nuclear background continuum and the
+      dark arm of the galaxy both appear at the same row on both sides. If a
+      science feature does not line up spatially with something visible on the
+      slit camera, suspect a cosmic ray, a sky line, or a misidentified target
+      before publishing.
+      <span class="compare-source">FYP report, Fig 29 (M81, long-slit)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. CASE STUDY ============ -->
+<section id="case-study">
+  <h2>7. Case Study: What Went Wrong in This Project</h2>
+
+  <p>
+    This section is included not to embarrass anyone, but because it is one of the most
+    valuable teaching cases this instrument has produced. Treat it as part of the
+    documentation.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-phase">Phase 1 &middot; Oct&ndash;Nov 2025</div>
+      <div class="timeline-body">
+        <strong>Targeted broad H&beta; in M81</strong>, a LINER-class low-luminosity AGN.
+        No convincing broad component was detected. Contributing factors: guide-camera
+        instability following an observatory PC reset, intermittent cloud cover, and
+        the intrinsic faintness of broad H&beta; in M81 (large Balmer decrement reported
+        by HST).
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Phase 2 &middot; Feb&ndash;Mar 2026</div>
+      <div class="timeline-body">
+        <strong>Switched to H&alpha;</strong> on the reasoning that broad H&alpha; is
+        intrinsically stronger than broad H&beta; by the Balmer decrement and would give
+        better signal per spectral element. Observations proceeded across multiple
+        nights.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Later</div>
+      <div class="timeline-body">
+        <strong>Calibration showed every retained Phase&nbsp;2 frame had actually sampled
+        ~5100&ndash;5400&nbsp;&Aring;</strong> &mdash; redward of H&beta;, blueward of
+        H&alpha;, with neither line present. The grating angle had been trusted after the
+        upgrade to the wider-spectrum Ar&ndash;Ne lamp without independently re-verifying
+        the line pattern against an atlas.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Outcome</div>
+      <div class="timeline-body">
+        The project was reframed as an <strong>instrumental feasibility study</strong>,
+        delivering a detectability framework, a calibrated noise model from a dedicated
+        2026-02-13 detector run, an empirical H&alpha;-region noise floor anchored on
+        the 2024 M82 campaign, and a practical warning about wavelength verification
+        &mdash; which is exactly what produced this guide.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Lessons that generalise</div>
+    <ul class="bullet tight">
+      <li>Verify the spectral window with an identified lamp frame <em>before</em> taking science exposures, not after.</li>
+      <li>Inspect raw 2D frames the same night they are taken. Do not defer to &ldquo;later in the analysis.&rdquo;</li>
+      <li>Document grating angles, lamp identifications, and decisions in a logbook the same night. Memory is not a calibration source.</li>
+      <li>A null result with a verified setup is publishable. A null result with an unverified setup is just a question mark.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 8. QUICK START ============ -->
+<section id="quickstart">
+  <h2>8. Student Quick-Start</h2>
+  <p class="lede small">First night with LHIRES III: what to do, in order.</p>
+
+  <ol class="quickstart">
+    <li><strong>Take dark frames</strong> matched to your planned science exposure time. NTU's procedure uses darks only &mdash; no bias frames, because exposures are always matched.</li>
+    <li><strong>Set the spectrograph grating angle</strong> to the nominal value for your target line.</li>
+    <li><strong>Take an Ar&ndash;Ne lamp frame.</strong> Without moving the grating.</li>
+    <li><strong>Confirm the wavelength range</strong> by identifying lamp lines. Do not proceed until this is done.</li>
+    <li><strong>Point the telescope</strong> at the target.</li>
+    <li><strong>Check that the target is on the slit</strong> using the slit/guiding camera.</li>
+    <li><strong>Start PHD2 autoguiding</strong> and confirm stable tracking.</li>
+    <li><strong>Take a short test exposure</strong> (e.g. 60&ndash;120 s).</li>
+    <li><strong>Inspect the trace</strong> on the test frame: present, well-centred, not saturated, no obvious cosmic ray pile-up.</li>
+    <li><strong>Take the long science exposures.</strong></li>
+    <li><strong>Take a closing lamp frame</strong> after each science set, to track flexure.</li>
+    <li><strong>Take flats</strong> using the spectrograph's flat-field unit (from the upgrade kit) at the end of the night.</li>
+  </ol>
+
+  <div class="callout tip">
+    <div class="callout-title">If you remember nothing else</div>
+    Steps 3 and 4 (lamp frame + wavelength confirmation) come <em>before</em> any science
+    exposure. Every time. Even on a clear night when you are running late.
+  </div>
+</section>
+
+<!-- ============ 9. TROUBLESHOOTING ============ -->
+<section id="troubleshooting">
+  <h2>9. Troubleshooting</h2>
+
+  <div class="ts-grid">
+    <div class="ts-card">
+      <h4>No trace visible on the science frame</h4>
+      <ul>
+        <li>Is the target actually on the slit? Check the slit camera.</li>
+        <li>Is the exposure long enough for the target's brightness?</li>
+        <li>Is focus correct on the spectrograph collimator?</li>
+        <li>Has the slit width been set correctly (not closed too narrow)?</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Guide camera not reliable</h4>
+      <ul>
+        <li>Is the guide star bright enough? Try a longer guide exposure.</li>
+        <li>Is PHD2 calibrated for the current pier side?</li>
+        <li>Cable snag or dew on the pickoff mirror?</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Lamp lines not matching the atlas</h4>
+      <ul>
+        <li>You are probably looking at the wrong region of the spectrum &mdash; <em>this is the dangerous case</em>.</li>
+        <li>Re-identify by pattern, not by single lines.</li>
+        <li>Move the grating slightly and confirm lines shift in the expected direction.</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Cosmic rays everywhere</h4>
+      <ul>
+        <li>Take multiple shorter exposures and combine, instead of one long one.</li>
+        <li>Use L.A.Cosmic or equivalent during reduction.</li>
+        <li>Check CCD temperature is stable.</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Saturated lamp frame</h4>
+      <ul>
+        <li>Reduce lamp exposure time.</li>
+        <li>Saturated lines bleed and shift centroids &mdash; do not use them for the wavelength fit.</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Wrong wavelength range</h4>
+      <ul>
+        <li>See &sect;4 and &sect;5. Re-tune and re-verify with a fresh lamp frame.</li>
+        <li>Do not try to &ldquo;rescue&rdquo; data taken before the range was confirmed unless you can prove the window from a contemporaneous lamp frame.</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Weak continuum</h4>
+      <ul>
+        <li>Check focus and slit alignment first.</li>
+        <li>Check transparency / cloud.</li>
+        <li>Stack multiple exposures rather than pushing a single exposure to saturation in the bright sky lines.</li>
+      </ul>
+    </div>
+
+    <div class="ts-card">
+      <h4>Target not centred on the slit</h4>
+      <ul>
+        <li>Re-centre using the slit camera before resuming.</li>
+        <li>Check telescope pointing model; do a fresh sync on a nearby bright star.</li>
+        <li>Check for differential flexure between guide path and science path.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Add to this page</div>
+    Found a new failure mode? Add it here so the next student does not rediscover it
+    from scratch. This guide is meant to grow.
+  </div>
+</section>
+
+<footer>
+  <div>Practical Guide to LHIRES III Spectroscopy at NTU Observatory</div>
+  <div class="muted">Maintained by students. Corrections and additions welcome.</div>
+</footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

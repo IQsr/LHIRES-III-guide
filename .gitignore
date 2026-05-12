@@ -1,0 +1,17 @@
+# Background source PDFs distilled into the guide — not site assets
+*.pdf
+
+# Local working draft; upstream lives in iqsr/LHIRES-III-simulator
+simulator-v2.html
+
+# OS / editor artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# Claude Code local settings
+.claude/
