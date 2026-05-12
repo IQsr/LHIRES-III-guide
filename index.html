@@ -320,6 +320,175 @@
     <li>If observing a galaxy or other Doppler-shifted source, apply the known redshift/blueshift and confirm the line still falls inside the frame.</li>
   </ol>
 
+  <h3>Wavelength atlas &mdash; which lines you should see at each screw setting</h3>
+  <p>Picking a screw setting is the same thing as picking a 281&nbsp;&Aring; slice of the spectrum to land on the CCD. The atlas below collapses all 20 PURS-2025 calibration panels into one wavelength axis: the upper ticks are the brightest Ne (yellow) and Ar (blue) emission lines, and each colored band underneath is the CCD window for a representative micrometer setting. Read it left-to-right and you can answer &ldquo;at <em>X</em>&nbsp;mm, what should the lamp look like?&rdquo; in one glance.</p>
+
+  <div class="wl-atlas">
+    <svg viewBox="0 0 980 510" class="wl-atlas-svg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wavelength atlas: Ne-Ar emission lines from 4000 to 7250 angstroms with the CCD window for eight micrometer screw settings (11.85 to 20.15 mm) shown as colored bands. The 18.35 mm H-alpha window is highlighted.">
+
+      <text x="14" y="18" font-size="11" letter-spacing="1.5" fill="#a8b3c1">NE/AR LINE ATLAS &middot; CCD WINDOWS BY MICROMETER SETTING</text>
+
+      <!-- Top wavelength axis -->
+      <line x1="60" y1="52" x2="970" y2="52" stroke="#2a3441" stroke-width="1"/>
+      <g font-size="10" fill="#6b7785" text-anchor="middle">
+        <line x1="60"  y1="48" x2="60"  y2="56" stroke="#6b7785"/><text x="60"  y="42">4000</text>
+        <line x1="200" y1="48" x2="200" y2="56" stroke="#6b7785"/><text x="200" y="42">4500</text>
+        <line x1="340" y1="48" x2="340" y2="56" stroke="#6b7785"/><text x="340" y="42">5000</text>
+        <line x1="480" y1="48" x2="480" y2="56" stroke="#6b7785"/><text x="480" y="42">5500</text>
+        <line x1="620" y1="48" x2="620" y2="56" stroke="#6b7785"/><text x="620" y="42">6000</text>
+        <line x1="760" y1="48" x2="760" y2="56" stroke="#6b7785"/><text x="760" y="42">6500</text>
+        <line x1="900" y1="48" x2="900" y2="56" stroke="#6b7785"/><text x="900" y="42">7000</text>
+        <text x="970" y="42" text-anchor="end" fill="#a8b3c1">&Aring;</text>
+      </g>
+
+      <!-- Faint vertical guides every 500 A -->
+      <g stroke="#1c2430" stroke-width="1" stroke-dasharray="2,4">
+        <line x1="200" y1="56" x2="200" y2="467"/>
+        <line x1="340" y1="56" x2="340" y2="467"/>
+        <line x1="480" y1="56" x2="480" y2="467"/>
+        <line x1="620" y1="56" x2="620" y2="467"/>
+        <line x1="760" y1="56" x2="760" y2="467"/>
+        <line x1="900" y1="56" x2="900" y2="467"/>
+      </g>
+
+      <!-- Hα and Hβ hydrogen reference markers (dashed red, full height) -->
+      <g stroke="#ff6b6b" stroke-dasharray="4,3">
+        <line x1="301.2" y1="56" x2="301.2" y2="467" stroke-width="1" opacity="0.55"/>
+        <line x1="777.6" y1="56" x2="777.6" y2="467" stroke-width="1.4" opacity="0.95"/>
+      </g>
+
+      <!-- Line atlas baseline -->
+      <line x1="60" y1="220" x2="970" y2="220" stroke="#2a3441" stroke-width="1"/>
+      <text x="64" y="234" font-size="10" fill="#6b7785">Ne&ndash;Ar emission lines &middot; tick height = relative intensity (PURS 2025)</text>
+
+      <!-- Ar lines (info blue) -->
+      <g stroke="#7fa6ff" stroke-width="1.6" stroke-linecap="butt">
+        <line x1="330.2" y1="220" x2="330.2" y2="174.5"/>
+        <line x1="392.6" y1="220" x2="392.6" y2="194.0"/>
+        <line x1="478.8" y1="220" x2="478.8" y2="174.5"/>
+        <line x1="500.3" y1="220" x2="500.3" y2="187.5"/>
+        <line x1="632.1" y1="220" x2="632.1" y2="187.5"/>
+        <line x1="830.8" y1="220" x2="830.8" y2="181.0"/>
+        <line x1="864.0" y1="220" x2="864.0" y2="187.5"/>
+        <line x1="890.3" y1="220" x2="890.3" y2="90.0" stroke-width="2.4"/>
+        <line x1="918.8" y1="220" x2="918.8" y2="90.0" stroke-width="2.4"/>
+        <line x1="941.2" y1="220" x2="941.2" y2="122.5"/>
+        <line x1="944.5" y1="220" x2="944.5" y2="148.5"/>
+        <line x1="958.0" y1="220" x2="958.0" y2="148.5"/>
+      </g>
+      <!-- Ne lines (warn yellow) -->
+      <g stroke="#f0b942" stroke-width="1.6" stroke-linecap="butt">
+        <line x1="452.2" y1="220" x2="452.2" y2="181.0"/>
+        <line x1="554.0" y1="220" x2="554.0" y2="187.5"/>
+        <line x1="578.7" y1="220" x2="578.7" y2="90.0" stroke-width="2.4"/>
+        <line x1="604.6" y1="220" x2="604.6" y2="161.5"/>
+        <line x1="640.8" y1="220" x2="640.8" y2="161.5"/>
+        <line x1="646.9" y1="220" x2="646.9" y2="174.5"/>
+        <line x1="660.1" y1="220" x2="660.1" y2="187.5"/>
+        <line x1="694.6" y1="220" x2="694.6" y2="168.0"/>
+        <line x1="713.6" y1="220" x2="713.6" y2="129.0"/>
+        <line x1="727.2" y1="220" x2="727.2" y2="148.5"/>
+        <line x1="732.6" y1="220" x2="732.6" y2="161.5"/>
+        <line x1="761.8" y1="220" x2="761.8" y2="155.0"/>
+        <line x1="769.2" y1="220" x2="769.2" y2="142.0"/>
+        <line x1="787.7" y1="220" x2="787.7" y2="187.5"/>
+        <line x1="809.9" y1="220" x2="809.9" y2="109.5" stroke-width="2.4"/>
+        <line x1="820.8" y1="220" x2="820.8" y2="174.5"/>
+        <line x1="880.3" y1="220" x2="880.3" y2="142.0"/>
+        <line x1="909.1" y1="220" x2="909.1" y2="142.0"/>
+      </g>
+
+      <!-- Labels for the key fingerprint lines (rotated -90 above the bars) -->
+      <g font-size="9.5" fill="#a8b3c1">
+        <text transform="translate(330.2 170) rotate(-90)">Ar 4965</text>
+        <text transform="translate(578.7 86)  rotate(-90)" fill="#f0b942" font-weight="600">Ne 5852.5 &#9733;</text>
+        <text transform="translate(604.6 158) rotate(-90)">Ne 5945</text>
+        <text transform="translate(713.6 125) rotate(-90)">Ne 6334</text>
+        <text transform="translate(732.6 158) rotate(-90)">Ne 6402</text>
+        <text transform="translate(769.2 139) rotate(-90)">Ne 6533</text>
+        <text transform="translate(809.9 106) rotate(-90)" fill="#f0b942">Ne 6678 &#9733;</text>
+        <text transform="translate(890.3 86)  rotate(-90)" fill="#7fa6ff" font-weight="600">Ar 6965 &#9733;</text>
+        <text transform="translate(918.8 86)  rotate(-90)" fill="#7fa6ff" font-weight="600">Ar 7067 &#9733;</text>
+        <text transform="translate(941.2 118) rotate(-90)">Ar 7147</text>
+      </g>
+
+      <!-- Hβ and Hα labels (small, on the marker lines) -->
+      <g font-size="10" fill="#ff6b6b" font-weight="600">
+        <text x="297" y="74" text-anchor="end">H&beta; 4861</text>
+        <text x="782" y="74">H&alpha; 6562.85</text>
+      </g>
+
+      <!-- Windows section header -->
+      <text x="14" y="252" font-size="10" letter-spacing="1" fill="#6b7785">CCD WINDOW BY MICROMETER SCREW SETTING &middot; EACH BAND &asymp; 281&#8201;&Aring; WIDE</text>
+
+      <!-- Window bands -->
+      <g font-size="10" fill="#a8b3c1">
+        <!-- 11.85 mm  4253-4533 -->
+        <rect x="130.84" y="262" width="78.4" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="276" text-anchor="end">11.85&nbsp;mm</text>
+        <text x="170.0" y="276" text-anchor="middle" fill="#e6edf3" font-size="9">4253&ndash;4533</text>
+
+        <!-- 13.10 mm  4670-4950 -->
+        <rect x="247.6" y="288" width="78.4" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="302" text-anchor="end">13.10&nbsp;mm</text>
+        <text x="286.8" y="302" text-anchor="middle" fill="#e6edf3" font-size="9">4670&ndash;4950</text>
+
+        <!-- 14.85 mm  5254-5534 -->
+        <rect x="411.12" y="314" width="78.4" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="328" text-anchor="end">14.85&nbsp;mm</text>
+        <text x="450.3" y="328" text-anchor="middle" fill="#e6edf3" font-size="9">5254&ndash;5534</text>
+
+        <!-- 16.15 mm  5688-5968  (Ne 5852 sits here) -->
+        <rect x="532.64" y="340" width="78.4" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="354" text-anchor="end">16.15&nbsp;mm</text>
+        <text x="571.84" y="354" text-anchor="middle" fill="#e6edf3" font-size="9">5688&ndash;5968</text>
+
+        <!-- 17.70 mm  6206-6486 -->
+        <rect x="677.68" y="366" width="78.4" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="380" text-anchor="end">17.70&nbsp;mm</text>
+        <text x="716.88" y="380" text-anchor="middle" fill="#e6edf3" font-size="9">6206&ndash;6486</text>
+
+        <!-- 18.35 mm  6422-6703  ★ Hα HIGHLIGHTED -->
+        <rect x="738.16" y="392" width="78.68" height="28" rx="4" fill="#3a2e10" stroke="#f0b942" stroke-width="2"/>
+        <text x="56" y="411" text-anchor="end" fill="#f0b942" font-weight="700">18.35&nbsp;mm &#9733;</text>
+        <text x="777.6" y="411" text-anchor="middle" fill="#e6edf3" font-size="10.5" font-weight="600">H&alpha; window &middot; 6422&ndash;6703</text>
+
+        <!-- 19.35 mm  6757-7037 -->
+        <rect x="831.96" y="426" width="78.4" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="440" text-anchor="end">19.35&nbsp;mm</text>
+        <text x="871.16" y="440" text-anchor="middle" fill="#e6edf3" font-size="9">6757&ndash;7037</text>
+
+        <!-- 20.15 mm  7024-7304 (clip at 970) -->
+        <rect x="906.72" y="452" width="63.28" height="20" rx="3" fill="#1c3a5e" stroke="#5aa9ff" stroke-width="1"/>
+        <text x="56" y="466" text-anchor="end">20.15&nbsp;mm</text>
+        <text x="938.36" y="466" text-anchor="middle" fill="#e6edf3" font-size="9">7024&ndash;7250+</text>
+      </g>
+
+      <!-- Bottom axis -->
+      <line x1="60" y1="482" x2="970" y2="482" stroke="#2a3441"/>
+      <g font-size="10" fill="#6b7785" text-anchor="middle">
+        <text x="60"  y="498">4000</text>
+        <text x="200" y="498">4500</text>
+        <text x="340" y="498">5000</text>
+        <text x="480" y="498">5500</text>
+        <text x="620" y="498">6000</text>
+        <text x="760" y="498">6500</text>
+        <text x="900" y="498">7000</text>
+        <text x="970" y="498" text-anchor="end" fill="#a8b3c1">&Aring;</text>
+      </g>
+    </svg>
+
+    <div class="wl-atlas-cap">
+      <strong>How to read this:</strong> each band is the &sim;281&nbsp;&Aring; slice of wavelength that lands on the CCD at that micrometer setting (1663&nbsp;px in 2&times;2 binning &times; 0.169&nbsp;&Aring;/px from the PURS 2025 linear fit &lambda;&nbsp;=&nbsp;0.1689&nbsp;&middot;&nbsp;pixel&nbsp;+&nbsp;4044.4). The four tallest ticks (Ne&nbsp;5852, Ne&nbsp;6678, Ar&nbsp;6965, Ar&nbsp;7067) are the brightest fingerprint lines &mdash; if you can't spot the one(s) inside your highlighted band on the lamp frame, your screw setting is not where you think it is. The 18.35&nbsp;mm band is the canonical H&alpha; window: confirm by seeing <strong>Ne&nbsp;6402, Ne&nbsp;6533</strong> inside it and (just past the red edge) the strong <strong>Ne&nbsp;6678</strong>.
+      <div class="wl-atlas-legend">
+        <span><span class="sw" style="background:#f0b942"></span>Ne emission line</span>
+        <span><span class="sw" style="background:#7fa6ff"></span>Ar emission line</span>
+        <span><span class="sw" style="background:#3a2e10;border:1px solid #f0b942"></span>H&alpha; screw setting (18.35&nbsp;mm)</span>
+        <span><span class="sw" style="background:#ff6b6b"></span>H&alpha; / H&beta; reference</span>
+      </div>
+    </div>
+  </div>
+
   <div class="callout danger">
     <div class="callout-title">Common mistake</div>
     Mistaking the lamp pattern can shift the interpreted wavelength range by
