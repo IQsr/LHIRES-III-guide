@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<a class="skip-link" href="#quickstart">Skip to the observing guide</a>
 <button id="navToggle" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">&#9776;</button>
 <button id="themeToggle" aria-label="Switch to light theme" title="Switch colour theme">☀</button>
 <div id="navBackdrop" aria-hidden="true"></div>
@@ -112,7 +113,7 @@
   </div>
   <div class="checklist-toolbar">
     <strong id="checkProgress" aria-live="polite">0 / 10 complete</strong>
-    <button id="resetChecklist" type="button">Reset for a new night</button>
+    <div class="checklist-actions"><button id="printChecklist" type="button">Print checklist</button><button id="resetChecklist" type="button">Reset for a new night</button></div>
   </div>
   <ul class="check-list">
     <li><label><input type="checkbox"> Target coordinates checked (RA/Dec, epoch, proper motion if relevant)</label></li>
@@ -660,67 +661,7 @@
 </section>
 
 <!-- ============ 7. CASE STUDY ============ -->
-<section id="case-study">
-  <h2>Case Study: What Went Wrong</h2>
 
-  <p>
-    This section is included not to embarrass anyone, but because it is one of the most
-    valuable teaching cases this instrument has produced. Treat it as part of the
-    documentation.
-  </p>
-
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-phase">Phase 1 &middot; Oct&ndash;Nov 2025</div>
-      <div class="timeline-body">
-        <strong>Targeted broad H&beta; in M81</strong>, a LINER-class low-luminosity AGN.
-        No convincing broad component was detected. Contributing factors: guide-camera
-        instability following an observatory PC reset, intermittent cloud cover, and
-        the intrinsic faintness of broad H&beta; in M81 (large Balmer decrement reported
-        by HST).
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-phase">Phase 2 &middot; Feb&ndash;Mar 2026</div>
-      <div class="timeline-body">
-        <strong>Switched to H&alpha;</strong> on the reasoning that broad H&alpha; is
-        intrinsically stronger than broad H&beta; by the Balmer decrement and would give
-        better signal per spectral element. Observations proceeded across multiple
-        nights.
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-phase">Later</div>
-      <div class="timeline-body">
-        <strong>Calibration showed every retained Phase&nbsp;2 frame had actually sampled
-        ~5100&ndash;5400&nbsp;&Aring;</strong> &mdash; redward of H&beta;, blueward of
-        H&alpha;, with neither line present. The grating angle had been trusted after the
-        upgrade to the wider-spectrum Ar&ndash;Ne lamp without independently re-verifying
-        the line pattern against an atlas.
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-phase">Outcome</div>
-      <div class="timeline-body">
-        The project was reframed as an <strong>instrumental feasibility study</strong>,
-        delivering a detectability framework, a calibrated noise model from a dedicated
-        2026-02-13 detector run, an empirical H&alpha;-region noise floor anchored on
-        the 2024 M82 campaign, and a practical warning about wavelength verification
-        &mdash; which is exactly what produced this guide.
-      </div>
-    </div>
-  </div>
-
-  <div class="callout info">
-    <div class="callout-title">Lessons that generalise</div>
-    <ul class="bullet tight">
-      <li>Verify the spectral window with an identified lamp frame <em>before</em> taking science exposures, not after.</li>
-      <li>Inspect raw 2D frames the same night they are taken. Do not defer to &ldquo;later in the analysis.&rdquo;</li>
-      <li>Document grating angles, lamp identifications, and decisions in a logbook the same night. Memory is not a calibration source.</li>
-      <li>A null result with a verified setup is publishable. A null result with an unverified setup is just a question mark.</li>
-    </ul>
-  </div>
-</section>
 
 <!-- ============ 8. QUICK START ============ -->
 
@@ -806,6 +747,68 @@
     <div class="callout-title">Add to this page</div>
     Found a new failure mode? Add it here so the next student does not rediscover it
     from scratch. This guide is meant to grow.
+  </div>
+</section>
+
+<section id="case-study">
+  <h2>Case Study: What Went Wrong</h2>
+
+  <p>
+    This section is included not to embarrass anyone, but because it is one of the most
+    valuable teaching cases this instrument has produced. Treat it as part of the
+    documentation.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-phase">Phase 1 &middot; Oct&ndash;Nov 2025</div>
+      <div class="timeline-body">
+        <strong>Targeted broad H&beta; in M81</strong>, a LINER-class low-luminosity AGN.
+        No convincing broad component was detected. Contributing factors: guide-camera
+        instability following an observatory PC reset, intermittent cloud cover, and
+        the intrinsic faintness of broad H&beta; in M81 (large Balmer decrement reported
+        by HST).
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Phase 2 &middot; Feb&ndash;Mar 2026</div>
+      <div class="timeline-body">
+        <strong>Switched to H&alpha;</strong> on the reasoning that broad H&alpha; is
+        intrinsically stronger than broad H&beta; by the Balmer decrement and would give
+        better signal per spectral element. Observations proceeded across multiple
+        nights.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Later</div>
+      <div class="timeline-body">
+        <strong>Calibration showed every retained Phase&nbsp;2 frame had actually sampled
+        ~5100&ndash;5400&nbsp;&Aring;</strong> &mdash; redward of H&beta;, blueward of
+        H&alpha;, with neither line present. The grating angle had been trusted after the
+        upgrade to the wider-spectrum Ar&ndash;Ne lamp without independently re-verifying
+        the line pattern against an atlas.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-phase">Outcome</div>
+      <div class="timeline-body">
+        The project was reframed as an <strong>instrumental feasibility study</strong>,
+        delivering a detectability framework, a calibrated noise model from a dedicated
+        2026-02-13 detector run, an empirical H&alpha;-region noise floor anchored on
+        the 2024 M82 campaign, and a practical warning about wavelength verification
+        &mdash; which is exactly what produced this guide.
+      </div>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <div class="callout-title">Lessons that generalise</div>
+    <ul class="bullet tight">
+      <li>Verify the spectral window with an identified lamp frame <em>before</em> taking science exposures, not after.</li>
+      <li>Inspect raw 2D frames the same night they are taken. Do not defer to &ldquo;later in the analysis.&rdquo;</li>
+      <li>Document grating angles, lamp identifications, and decisions in a logbook the same night. Memory is not a calibration source.</li>
+      <li>A null result with a verified setup is publishable. A null result with an unverified setup is just a question mark.</li>
+    </ul>
   </div>
 </section>
 
